@@ -1,0 +1,26 @@
+---
+title: Multimodal Malnutrition Screening
+summary: A multimodal model that screens for child malnutrition from health data and images, and holds up on a national dataset it never saw during training.
+metric: "0.884"
+metricLabel: ROC-AUC on an unseen national holdout
+tags: [LightGBM, XGBoost, EfficientNet-B0, SHAP, ONNX]
+order: 3
+status: "Manuscript"
+pdf: /papers/malnutrition-screening.pdf
+---
+
+## Abstract
+
+Early detection saves lives, but screening is hard where specialists are few. This work builds a multimodal screening model that combines tabular data (LightGBM, XGBoost) with images (EfficientNet-B0), explains its decisions with SHAP, and exports to ONNX so it can run on a phone inside PustiPath.
+
+> TODO: paste the abstract from your manuscript, and the venue/status.
+
+## Key results
+
+| Metric | Result |
+| --- | --- |
+| ROC-AUC (unseen national holdout) | 0.884 |
+
+## Method
+
+> TODO: add the method figure and ROC curve from the paper.

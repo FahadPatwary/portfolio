@@ -1,0 +1,114 @@
+import Hero from "@/components/Hero";
+import Section from "@/components/Section";
+import Reveal from "@/components/Reveal";
+import PaperCard from "@/components/PaperCard";
+import ProjectCard from "@/components/ProjectCard";
+import SkillsExplorer from "@/components/SkillsExplorer";
+import TechMarquee from "@/components/TechMarquee";
+import CodeCard from "@/components/CodeCard";
+import { getProjects, getResearch } from "@/lib/content";
+import CertCard from "@/components/CertCard";
+import { certifications } from "@/lib/certs";
+import { site } from "@/lib/site";
+
+export default function Home() {
+  const research = getResearch();
+  const projects = getProjects();
+  const edu = site.education;
+  // Software-first: lead with what was built, then the academic record.
+  const stats = [
+    { value: "3", label: "on-device ONNX models in PustiPath" },
+    { value: "3", label: "first-author research papers" },
+    { value: "UIU", label: "B.Sc. in Computer Science & Engineering" },
+  ];
+
+  return (
+    <>
+      <Hero stats={stats} />
+      <TechMarquee />
+
+      <Section id="about" n="01" eyebrow="About" title="Software that works where the internet doesn't">
+        <div className="grid items-start gap-6 md:grid-cols-[1.3fr_1fr]">
+          <Reveal>
+            <p className="max-w-[62ch]">
+              My flagship project, PustiPath, puts AI malnutrition screening on the Android phones of community
+              health workers in Bangladesh, fully offline. I designed the system and led the research behind it,
+              used AI assistance to write much of the code, and backed it with automated unit, access-control
+              and end-to-end tests.
+            </p>
+            <p className="mt-3 max-w-[62ch] text-muted">
+              I am a Computer Science &amp; Engineering graduate of United International University and the first
+              author of three research manuscripts, on energy-efficient transformers, smart-grid intrusion
+              detection and child-malnutrition screening.
+            </p>
+          </Reveal>
+          <Reveal delay={100}><CodeCard /></Reveal>
+        </div>
+      </Section>
+
+      <Section id="projects" n="02" eyebrow="Projects" title="Real systems, designed and tested">
+        <div className="grid gap-4 md:grid-cols-2">
+          {projects.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 80} className={`h-full ${p.featured ? "md:col-span-2" : ""}`}>
+              <ProjectCard p={p} />
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="research" n="03" eyebrow="Research" title="Research, measured">
+        <div className="grid gap-4 md:grid-cols-3">
+          {research.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 80} className="h-full"><PaperCard p={p} i={i} /></Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="skills" n="04" eyebrow="Skills" title="The toolkit">
+        <Reveal><SkillsExplorer /></Reveal>
+      </Section>
+
+      <Section id="education" n="05" eyebrow="Education" title="Education">
+        <Reveal>
+          <div className="card max-w-[70ch] p-5">
+            <h3 className="text-base font-semibold">{edu.school}</h3>
+            <p>{edu.degree}</p>
+            <p className="text-muted">{edu.years}</p>
+            {edu.coursework.length > 0 && (
+              <p className="mt-2 text-sm text-muted">Coursework: {edu.coursework.join(", ")}</p>
+            )}
+          </div>
+        </Reveal>
+      </Section>
+
+      <Section id="certifications" n="06" eyebrow="Certifications" title="Licenses &amp; certifications">
+        <div className="grid gap-4 md:grid-cols-3">
+          {certifications.map((c, i) => (
+            <Reveal key={c.title} delay={i * 80} className="h-full"><CertCard c={c} /></Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <section id="contact" aria-labelledby="contact-h" className="mx-auto max-w-[1040px] px-5 py-12">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl bg-navy px-6 py-10 text-center text-on-navy sm:px-10 sm:py-12">
+            <div aria-hidden="true" className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/25 blur-3xl" />
+            <p className="eyebrow relative !text-on-navy/70">07 / Contact</p>
+            <h2 id="contact-h" className="relative mx-auto mt-2 max-w-[24ch] text-2xl font-extrabold !text-on-navy sm:text-3xl">
+              Let&apos;s build something useful.
+            </h2>
+            <p className="relative mx-auto mt-3 max-w-[52ch] text-sm text-on-navy/80">
+              I am looking for software engineering, SQA and R&amp;D internships and entry-level roles. If you are hiring, I would love to talk.
+            </p>
+            <div className="relative mt-6 flex flex-wrap justify-center gap-2.5">
+              <a className="btn !border-on-navy !bg-on-navy !text-navy" href={`mailto:${site.email}`}>{site.email}</a>
+              <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.cv}>Download CV</a>
+              <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.linkedin}>LinkedIn</a>
+              <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.github}>GitHub</a>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    </>
+  );
+}

@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --bg: #f6f7fa;
+  --surface: #ffffff;
+  --surface-2: #eef1f6;
+  --navy: #1b2a4a;
+  --text: #1f1f24;
+  --muted: #545a69;
+  --border: #dde1e9;
+  --accent: #0a7466;
+  --accent-soft: rgba(10, 116, 102, 0.1);
+  --on-navy: #ffffff;
+  --shadow: 0 1px 2px rgba(27, 42, 74, 0.04), 0 8px 24px -12px rgba(27, 42, 74, 0.18);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0c1424;
+  --surface: #14203a;
+  --surface-2: #1a2848;
+  --navy: #e8edf7;
+  --text: #e9ebf0;
+  --muted: #a3acc0;
+  --border: #2a3a5e;
+  --accent: #4fd1bd;
+  --accent-soft: rgba(79, 209, 189, 0.12);
+  --on-navy: #12203b;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px -14px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-navy: var(--navy);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-accent: var(--accent);
+  --color-on-navy: var(--on-navy);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; font-size: 15px; }
+body {
+  background: var(--bg); color: var(--text); font-size: 1rem; line-height: 1.6;
+  transition: background-color .25s, color .25s;
+}
+h1, h2, h3 { color: var(--navy); letter-spacing: -0.02em; }
+a { color: var(--accent); text-underline-offset: 3px; }
+::selection { background: var(--accent); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .55rem 1.05rem; border-radius: 10px; font-weight: 600; font-size: .95rem;
+  border: 1px solid var(--navy); text-decoration: none; cursor: pointer;
+  transition: transform .15s, background .15s, color .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--navy); color: var(--on-navy); box-shadow: var(--shadow); }
+.btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Cards */
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: var(--shadow); transition: border-color .2s, transform .2s;
+}
+.card-hover:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.chip {
+  font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: .76rem;
+  padding: .2rem .6rem; border: 1px solid var(--border); border-radius: 999px;
+  color: var(--muted); background: var(--surface-2);
+}
+
+.eyebrow {
+  font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: .8rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+}
+
+/* Hero backdrop */
+.hero-bg {
+  background:
+    radial-gradient(60% 50% at 85% 10%, var(--accent-soft), transparent 70%),
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--navy) 14%, transparent) 1px, transparent 0) 0 0 / 26px 26px;
+  mask-image: linear-gradient(to bottom, #000 60%, transparent);
+}
+
+/* Scroll reveal (only active when JS has set html.js) */
+.js .rv { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.js .rv.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .rv { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: 0s !important; animation: none !important; }
+}
+
+/* Floating badges */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.float { animation: float 6s ease-in-out infinite; }
+
+/* MDX prose */
+.prose {
+  --tw-prose-body: var(--text); --tw-prose-headings: var(--navy); --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--text); --tw-prose-th-borders: var(--border); --tw-prose-td-borders: var(--border);
+  --tw-prose-quotes: var(--muted); --tw-prose-quote-borders: var(--accent); --tw-prose-code: var(--text);
+  max-width: 75ch;
+}
+.prose blockquote { font-style: normal; background: var(--accent-soft); padding: .5rem 1rem; border-radius: 0 10px 10px 0; }
+.prose blockquote p::before, .prose blockquote p::after { content: none; }
+.prose table { display: block; overflow-x: auto; }
+
+/* Tech marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee { mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+
+/* Code card */
+.code { font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: .82rem; line-height: 1.75; }
+.code .k { color: var(--accent); } .code .s { color: #c2410c; } .code .c { color: var(--muted); }
+:root[data-theme="dark"] .code .s { color: #f5b36b; }
+@keyframes blink { 50% { opacity: 0; } }
+.caret { display: inline-block; width: .5ch; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1.1s step-end infinite; }
+
+/* Skills explorer */
+.skill { display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .85rem; padding: .35rem .8rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  transition: transform .15s, border-color .15s, background .15s, color .15s, box-shadow .15s;
+}
+.skill:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+.skill-on { background: var(--accent); border-color: var(--accent); color: var(--bg); box-shadow: 0 6px 18px -6px var(--accent); }
+.skill-on:hover { color: var(--bg); }
+.skill-pop { animation: skill-pop .35s ease both; }
+@keyframes skill-pop { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: none; } }
