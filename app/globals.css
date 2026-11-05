@@ -130,7 +130,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .caret { display: inline-block; width: .5ch; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1.1s step-end infinite; }
 
 /* Skills explorer */
-.skill { display: inline-flex; align-items: center; gap: .5rem;
+.skill { max-width: 100%; text-align: left; line-height: 1.3; min-height: 2.5rem; display: inline-flex; align-items: center; gap: .5rem;
   font-size: .85rem; padding: .35rem .8rem; border-radius: 999px; cursor: pointer;
   border: 1px solid var(--border); background: var(--surface); color: var(--text);
   transition: transform .15s, border-color .15s, background .15s, color .15s, box-shadow .15s;
@@ -140,3 +140,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .skill-on:hover { color: var(--bg); }
 .skill-pop { animation: skill-pop .35s ease both; }
 @keyframes skill-pop { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: none; } }
+
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+@media (min-width: 768px) { .skill { min-height: 2.1rem; } }

@@ -1,6 +1,6 @@
 const stack = [
   "Next.js", "TypeScript", "Firebase", "ONNX Runtime", "Tailwind CSS", "Python",
-  "Selenium", "Appium", "pytest", "PyTorch", "Socket.IO",
+  "Selenium", "Appium", "pytest", "PyTorch",
 ];
 
 /** Decorative scrolling stack strip. Hidden from assistive tech; the Skills section has the real list. */

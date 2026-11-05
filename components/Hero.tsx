@@ -24,8 +24,8 @@ export default function Hero({ stats }: { stats: { value: string; label: string 
           </p>
           <div className="mt-4"><Chips items={site.tags} /></div>
 
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            <a className="btn btn-primary" href={site.cv}>
+          <div className="mt-6 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
+            <a className="btn btn-primary col-span-2 sm:col-auto" href={site.cv} download="Fahad_Ahmed_Patwary_CV.pdf">
               Download CV
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14" /></svg>
             </a>
@@ -46,7 +46,7 @@ export default function Hero({ stats }: { stats: { value: string; label: string 
           </dl>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[260px] md:max-w-[290px] md:justify-self-end">
+        <div className="relative mx-auto w-full max-w-[220px] sm:max-w-[260px] md:max-w-[290px] md:justify-self-end">
           <div aria-hidden="true" className="absolute -right-2.5 -top-2.5 h-full w-full rounded-3xl border-2 border-accent/60" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-white shadow-[var(--shadow)]">
             <Image

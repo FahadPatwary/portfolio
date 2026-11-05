@@ -57,7 +57,7 @@ export default function Nav({ cv }: { cv: string }) {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <a href={cv} className="btn btn-primary !px-4 !py-1.5 !text-sm">CV</a>
+          <a href={cv} target="_blank" rel="noopener noreferrer" className="btn btn-primary !px-4 !py-1.5 !text-sm">CV</a>
           <button
             className="grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-navy md:hidden"
             aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu"

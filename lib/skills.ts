@@ -51,15 +51,8 @@ export const skillCategories: SkillCategory[] = [
 
 // Only claims backed by the project report / papers.
 export const usedIn: Record<string, { label: string; href: string }[]> = {
-  "Next.js": [
-    { label: "PustiPath admin dashboard", href: "/projects/pustipath/" },
-    { label: "WatchTogether", href: "/projects/watchtogether/" },
-  ],
+  "Next.js": [{ label: "PustiPath admin dashboard", href: "/projects/pustipath/" }],
   "Test automation (Selenium)": [{ label: "PustiPath end-to-end suite", href: "/projects/pustipath/" }],
-  "Tailwind CSS": [
-    { label: "NoteBins", href: "/projects/notebins/" },
-    { label: "WatchTogether", href: "/projects/watchtogether/" },
-  ],
   "Machine learning": [{ label: "Three research papers", href: "/#research" }],
   Python: [{ label: "Research experiments", href: "/#research" }],
 };

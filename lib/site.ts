@@ -15,11 +15,27 @@ export const site = {
     { k: "Papers", v: "3" },
     { k: "Based in", v: "Dhaka" },
   ],
-  education: {
-    school: "United International University (UIU)",
-    degree: "B.Sc. in Computer Science & Engineering",
-    // TODO: confirm graduation month (plan: Final Year Design Project III still running in trimester 262)
-    years: "Dhaka, Bangladesh",
-    coursework: [] as string[], // TODO: add coursework
-  },
+  education: [
+    {
+      level: "B.Sc. in Computer Science & Engineering",
+      school: "United International University (UIU), Dhaka",
+      years: "2022 – 2026", // TODO: confirm graduation year
+      coursework: [
+        "OOP", "Data Structures & Algorithms", "DBMS", "Operating Systems", "Computer Networks",
+        "Software Engineering", "Network Security", "Cryptography",
+      ],
+    },
+    {
+      level: "Higher Secondary Certificate (HSC)",
+      school: "Birshrestha Munshi Abdur Rouf Public College",
+      years: "2021",
+      result: "GPA 5.00 / 5.00",
+    },
+    {
+      level: "Secondary School Certificate (SSC)",
+      school: "Motijheel Model High School",
+      years: "2019",
+      result: "GPA 5.00 / 5.00",
+    },
+  ] as { level: string; school: string; years: string; result?: string; coursework?: string[] }[],
 };

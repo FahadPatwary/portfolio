@@ -29,3 +29,6 @@ FormalPhoto.png
 
 # Claude Code local settings
 .claude/
+
+# Personal career files (CV drafts, transcripts, manuscripts); never commit
+career/

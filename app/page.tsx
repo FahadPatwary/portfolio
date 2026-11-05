@@ -8,13 +8,13 @@ import TechMarquee from "@/components/TechMarquee";
 import CodeCard from "@/components/CodeCard";
 import { getProjects, getResearch } from "@/lib/content";
 import CertCard from "@/components/CertCard";
+import Chips from "@/components/Chips";
 import { certifications } from "@/lib/certs";
 import { site } from "@/lib/site";
 
 export default function Home() {
   const research = getResearch();
   const projects = getProjects();
-  const edu = site.education;
   // Software-first: lead with what was built, then the academic record.
   const stats = [
     { value: "3", label: "on-device ONNX models in PustiPath" },
@@ -46,7 +46,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="projects" n="02" eyebrow="Projects" title="Real systems, designed and tested">
+      <Section id="projects" n="02" eyebrow="Projects" title="A flagship system, designed and tested">
         <div className="grid gap-4 md:grid-cols-2">
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={i * 80} className={`h-full ${p.featured ? "md:col-span-2" : ""}`}>
@@ -69,16 +69,24 @@ export default function Home() {
       </Section>
 
       <Section id="education" n="05" eyebrow="Education" title="Education">
-        <Reveal>
-          <div className="card max-w-[70ch] p-5">
-            <h3 className="text-base font-semibold">{edu.school}</h3>
-            <p>{edu.degree}</p>
-            <p className="text-muted">{edu.years}</p>
-            {edu.coursework.length > 0 && (
-              <p className="mt-2 text-sm text-muted">Coursework: {edu.coursework.join(", ")}</p>
-            )}
-          </div>
-        </Reveal>
+        <ol className="relative max-w-[760px] space-y-4 border-l border-line pl-5 sm:pl-7">
+          {site.education.map((e, i) => (
+            <li key={e.level} className="relative">
+              <span aria-hidden="true" className="absolute -left-[1.62rem] top-5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-bg sm:-left-[2.1rem]" />
+              <Reveal delay={i * 80}>
+                <div className="card p-4 sm:p-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="text-base font-semibold">{e.level}</h3>
+                    <p className="font-mono text-xs text-muted">{e.years}</p>
+                  </div>
+                  <p className="text-muted">{e.school}</p>
+                  {e.result && <p className="mt-1 text-sm font-semibold text-accent">{e.result}</p>}
+                  {e.coursework && <div className="mt-3"><Chips items={e.coursework} /></div>}
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       <Section id="certifications" n="06" eyebrow="Certifications" title="Licenses &amp; certifications">
@@ -102,7 +110,7 @@ export default function Home() {
             </p>
             <div className="relative mt-6 flex flex-wrap justify-center gap-2.5">
               <a className="btn !border-on-navy !bg-on-navy !text-navy" href={`mailto:${site.email}`}>{site.email}</a>
-              <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.cv}>Download CV</a>
+              <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.cv} download="Fahad_Ahmed_Patwary_CV.pdf">Download CV</a>
               <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.linkedin}>LinkedIn</a>
               <a className="btn !border-on-navy/40 !bg-transparent !text-on-navy" href={site.github}>GitHub</a>
             </div>
