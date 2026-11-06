@@ -1,6 +1,6 @@
 ---
 title: PustiPath
-summary: An offline, Bengali-first Android app that lets community health workers screen children for malnutrition on their own phones, with no internet required.
+summary: An offline, Bengali-first platform that lets community health workers screen children for malnutrition on their own phones, with no internet required, then coordinates the care that follows.
 metric: "3"
 metricLabel: on-device ONNX models, fully offline
 tags: [Flutter, ONNX Runtime, Firebase, Next.js, Testing]
@@ -11,40 +11,4 @@ links:
     href: https://github.com/FahadPatwary/pustipath
 ---
 
-## The problem
-
-In rural Bangladesh, child malnutrition often goes unnoticed until it becomes serious. Clinics are far away, trained specialists are scarce, and internet access cannot be assumed. Any screening tool that depends on the cloud fails exactly where it is needed most.
-
-## The solution
-
-PustiPath moves the intelligence onto the phone. A health worker enters a child's measurements and the app runs three on-device ONNX models, then shows a clear traffic-light result: green, amber or red. Because inference happens locally, it works with no connection at all.
-
-Around that core, the app provides alerts, growth charts, help requests, volunteer tasks, chat and a nutrition academy. Everything is Bengali-first, so the people who use it every day can use it comfortably. An admin dashboard gives programme managers a view of the whole picture.
-
-## Architecture
-
-The Flutter app runs the ONNX models on the device. Firebase handles the shared layer: Authentication, Firestore, Cloud Functions, push notifications and Storage. A Next.js dashboard sits on top for administrators.
-
-> TODO: add the architecture diagram to `public/screenshots/`.
-
-## Security by default
-
-Access is role-based, using custom claims. Anything privileged is written only by trusted server code, and Firestore rules deny everything unless explicitly allowed. A mistake in the app cannot quietly expose a child's data.
-
-## How it was tested
-
-Quality was treated as part of the design, not an afterthought. The suite covers unit and widget tests with `flutter_test` and Mockito, and end-to-end tests with pytest, Selenium and Appium. Dedicated role-based access-control tests check that each user can reach only what they should, and results are published as an HTML test report.
-
-## My role
-
-I designed the system architecture and conducted the research behind PustiPath, including the models that run on the device. I used AI assistance to write much of the code, including the Flutter app, and I directed and reviewed that work against the design.
-
-> TODO: list what teammates contributed, if anything.
-
-## Screenshots
-
-> TODO: scan screen, risk result, growth chart and dashboard.
-
-## Limitations and next steps
-
-> TODO: summarise sections 8–9 of the PustiPath report.
+The project page uses a custom case-study layout, see `components/pustipath/CaseStudy.tsx`. This file supplies the title, summary, tags and links used by the project cards.

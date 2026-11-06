@@ -46,7 +46,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="projects" n="02" eyebrow="Projects" title="A flagship system, designed and tested">
+      <Section id="projects" n="02" eyebrow="Projects" title="Software I've designed and shipped">
         <div className="grid gap-4 md:grid-cols-2">
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={i * 80} className={`h-full ${p.featured ? "md:col-span-2" : ""}`}>

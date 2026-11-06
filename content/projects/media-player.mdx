@@ -1,0 +1,51 @@
+---
+title: Media Player (Next Gen Sync)
+summary: A desktop app for watching videos in sync with friends. Create a room, share its ID, and play, pause and seek together over a peer-to-peer connection.
+metric: "P2P"
+metricLabel: synced playback, Windows build working (macOS build damaged)
+tags: [WebRTC, Peer-to-peer, Desktop app, Next.js]
+order: 2
+links:
+  - label: Live site
+    href: https://smediaplayer.netlify.app/
+---
+
+## The problem
+
+Watching a film with friends who are far away usually means a countdown in a chat window ("3, 2, 1, play") and constant corrections when someone pauses or lags. Streaming services have watch parties, but they lock you into one catalogue and one account. Most people just want to watch the files they already have, together.
+
+## The solution
+
+Media Player keeps everyone's playback in step. One person creates a room and shares the Room ID. Friends paste it and join. Each person loads the same video file on their own computer, and from then on play, pause and seek apply to the whole room.
+
+Because each person plays their own local copy, nothing is uploaded or re-streamed. The app only needs to pass small control messages between peers, so it stays light and works with any file you own.
+
+## Features
+
+| Feature | What it does |
+| --- | --- |
+| Rooms | Create a private room and invite friends with a Room ID |
+| Synchronised playback | Play, pause and seek are shared with everyone in the room |
+| Peer connections | Control messages travel over WebRTC channels between participants |
+| Local playback | Plays files from your own disk, and works offline for solo viewing |
+| Cinema mode | A dark, distraction-free interface |
+| Playback controls | Volume boost and session management |
+| Formats | MP4, MKV and AVI, among other common video formats |
+
+## How it works
+
+1. The host creates a room and gets a Room ID.
+2. Friends join with that ID, and a lightweight signalling step connects the peers.
+3. Every participant drops in the same video file.
+4. Playback actions from anyone are broadcast to the rest of the room and applied locally.
+
+## Shipping it
+
+The app is packaged for two platforms: a portable Windows 10/11 build that needs no admin rights, and a universal macOS build for Intel and Apple Silicon. A separate website presents the product, a user manual and the downloads. I designed and built the app and its website.
+
+## Limitations
+
+- Everyone needs the same video file, because the app syncs playback, not the video itself.
+- The macOS build is currently damaged, so Windows is the working version for now.
+- Peers must be able to reach a signalling server to find each other.
+- Version 1.0 is a first release. The changelog, roadmap and documentation pages are still to come.

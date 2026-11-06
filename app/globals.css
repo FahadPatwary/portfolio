@@ -141,6 +141,9 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .skill-pop { animation: skill-pop .35s ease both; }
 @keyframes skill-pop { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: none; } }
 
+/* Case-study pages have a second sticky bar, so anchors need extra room */
+.case section[id] { scroll-margin-top: 2.6rem; }
+
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 @media (min-width: 768px) { .skill { min-height: 2.1rem; } }

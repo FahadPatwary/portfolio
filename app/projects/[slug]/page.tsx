@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Chips from "@/components/Chips";
 import MDX from "@/components/MDX";
+import CaseStudy from "@/components/pustipath/CaseStudy";
+import MediaPlayerCaseStudy from "@/components/mediaplayer/CaseStudy";
 import { getProjects } from "@/lib/content";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -20,6 +22,10 @@ export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const p = getProjects().find((x) => x.slug === slug);
   if (!p) notFound();
+
+  // The flagship project has a purpose-built case-study layout.
+  if (slug === "pustipath") return <CaseStudy p={p} />;
+  if (slug === "media-player") return <MediaPlayerCaseStudy p={p} />;
 
   return (
     <article className="mx-auto max-w-[1040px] px-5 py-12">

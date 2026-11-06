@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Chips from "@/components/Chips";
 import MDX from "@/components/MDX";
+import GoosePaper from "@/components/research/Goose";
+import GreenAIPaper from "@/components/research/GreenAI";
+import MalnutritionPaper from "@/components/research/Malnutrition";
 import { getResearch } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -31,6 +34,20 @@ export default async function ResearchPage({ params }: Props) {
     keywords: p.tags.join(", "),
     url: `${site.url}/research/${p.slug}/`,
   };
+
+  const custom: Record<string, React.ReactNode> = {
+    "green-ai": <GreenAIPaper />,
+    "goose-ids": <GoosePaper />,
+    malnutrition: <MalnutritionPaper />,
+  };
+  if (custom[slug]) {
+    return (
+      <>
+        {custom[slug]}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      </>
+    );
+  }
 
   return (
     <article className="mx-auto max-w-[1040px] px-5 py-12">
