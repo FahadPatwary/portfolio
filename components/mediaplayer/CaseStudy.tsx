@@ -100,7 +100,7 @@ export default function MediaPlayerCaseStudy({ p }: { p: Entry }) {
           <p className="mt-4 max-w-[60ch] text-lg text-muted">
             Watch movies and shows in perfect step with friends. Create a room, share its ID, and everyone plays, pauses and seeks together.
           </p>
-          <div className="mt-5"><Chips items={["WebRTC", "Peer-to-peer", "Windows", "macOS", "Next.js site"]} /></div>
+          <div className="mt-5"><Chips items={["Electron", "WebRTC", "Peer-to-peer", "Windows", "macOS"]} /></div>
           <div className="mt-6 flex flex-wrap gap-2.5">
             {live && (
               <a href={live.href} target="_blank" rel="noopener noreferrer" className="btn border-transparent bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-[var(--shadow)]">
@@ -220,7 +220,7 @@ export default function MediaPlayerCaseStudy({ p }: { p: Entry }) {
         </Reveal>
         <Reveal>
           <p className="mt-5 max-w-[66ch] text-sm text-muted">
-            A separate website presents the product, a user manual and the downloads. I designed and built the app and its website.
+            The desktop app is built with Electron. A separate website presents the product, a user manual and the downloads. I designed and built the app and its website.
           </p>
         </Reveal>
       </Section>
