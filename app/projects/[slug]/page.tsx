@@ -6,6 +6,8 @@ import MDX from "@/components/MDX";
 import CaseStudy from "@/components/pustipath/CaseStudy";
 import MediaPlayerCaseStudy from "@/components/mediaplayer/CaseStudy";
 import { getProjects } from "@/lib/content";
+import { breadcrumbLd, pageOg } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,7 +17,16 @@ export const generateStaticParams = () => getProjects().map((p) => ({ slug: p.sl
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = getProjects().find((x) => x.slug === slug);
-  return p ? { title: p.title, description: p.summary, alternates: { canonical: `/projects/${slug}/` } } : {};
+  if (!p) return {};
+  const path = `/projects/${slug}/`;
+  return {
+    title: p.title,
+    description: p.summary,
+    keywords: [...p.tags, p.title, "Fahad Ahmed Patwary", "Fahad Patwary"],
+    alternates: { canonical: path },
+    openGraph: pageOg(p.title, p.summary, path),
+    twitter: { card: "summary_large_image", title: `${p.title} — ${site.name}`, description: p.summary },
+  };
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -23,9 +34,31 @@ export default async function ProjectPage({ params }: Props) {
   const p = getProjects().find((x) => x.slug === slug);
   if (!p) notFound();
 
-  // The flagship project has a purpose-built case-study layout.
-  if (slug === "pustipath") return <CaseStudy p={p} />;
-  if (slug === "media-player") return <MediaPlayerCaseStudy p={p} />;
+  const path = `/projects/${slug}/`;
+  const ld = [
+    breadcrumbLd([
+      { name: "Home", path: "/" },
+      { name: "Projects", path: "/#projects" },
+      { name: p.title, path },
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: p.title,
+      description: p.summary,
+      url: `${site.url}${path}`,
+      applicationCategory: "DeveloperApplication",
+      keywords: p.tags.join(", "),
+      author: { "@id": `${site.url}/#person` },
+      creator: { "@id": `${site.url}/#person` },
+      sameAs: p.links?.map((l) => l.href),
+    },
+  ];
+  const ldScript = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />;
+
+  // Flagship projects have purpose-built case-study layouts.
+  if (slug === "pustipath") return <><CaseStudy p={p} />{ldScript}</>;
+  if (slug === "media-player") return <><MediaPlayerCaseStudy p={p} />{ldScript}</>;
 
   return (
     <article className="mx-auto max-w-[1040px] px-5 py-12">
@@ -39,6 +72,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
       <div className="mt-8"><MDX source={p.body} /></div>
+      {ldScript}
     </article>
   );
 }

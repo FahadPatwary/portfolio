@@ -31,7 +31,7 @@ export default function Home() {
         <div className="grid items-start gap-6 md:grid-cols-[1.3fr_1fr]">
           <Reveal>
             <p className="max-w-[62ch]">
-              My flagship project, PustiPath, puts AI malnutrition screening on the Android phones of community
+              Hi, I am Fahad Patwary, a software engineer from Dhaka, Bangladesh. My flagship project, PustiPath, puts AI malnutrition screening on the Android phones of community
               health workers in Bangladesh, fully offline. I designed the system and led the research behind it,
               used AI assistance to write much of the code, and backed it with automated unit, access-control
               and end-to-end tests.

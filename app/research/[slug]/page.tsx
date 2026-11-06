@@ -7,6 +7,7 @@ import GoosePaper from "@/components/research/Goose";
 import GreenAIPaper from "@/components/research/GreenAI";
 import MalnutritionPaper from "@/components/research/Malnutrition";
 import { getResearch } from "@/lib/content";
+import { breadcrumbLd, pageOg } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -17,7 +18,16 @@ export const generateStaticParams = () => getResearch().map((p) => ({ slug: p.sl
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = getResearch().find((x) => x.slug === slug);
-  return p ? { title: p.title, description: p.summary, alternates: { canonical: `/research/${slug}/` } } : {};
+  if (!p) return {};
+  const path = `/research/${slug}/`;
+  return {
+    title: p.title,
+    description: p.summary,
+    keywords: [...p.tags, p.title, "Fahad Ahmed Patwary", "Fahad Patwary", "research"],
+    alternates: { canonical: path },
+    openGraph: pageOg(p.title, p.summary, path),
+    twitter: { card: "summary_large_image", title: `${p.title} — ${site.name}`, description: p.summary },
+  };
 }
 
 export default async function ResearchPage({ params }: Props) {
@@ -25,15 +35,23 @@ export default async function ResearchPage({ params }: Props) {
   const p = getResearch().find((x) => x.slug === slug);
   if (!p) notFound();
 
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    headline: p.title,
-    description: p.summary,
-    author: { "@type": "Person", name: site.name, url: site.url },
-    keywords: p.tags.join(", "),
-    url: `${site.url}/research/${p.slug}/`,
-  };
+  const ld = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      headline: p.title,
+      description: p.summary,
+      author: { "@id": `${site.url}/#person` },
+      keywords: p.tags.join(", "),
+      url: `${site.url}/research/${p.slug}/`,
+      inLanguage: "en",
+    },
+    breadcrumbLd([
+      { name: "Home", path: "/" },
+      { name: "Research", path: "/#research" },
+      { name: p.title, path: `/research/${p.slug}/` },
+    ]),
+  ];
 
   const custom: Record<string, React.ReactNode> = {
     "green-ai": <GreenAIPaper />,
