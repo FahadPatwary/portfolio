@@ -8,6 +8,13 @@ export type Cert = {
 
 export const certifications: Cert[] = [
   {
+    title: "Software Engineer (Role Certification)",
+    issuer: "HackerRank",
+    issued: "Nov 2026",
+    skills: ["Software Engineering"],
+    url: "https://www.hackerrank.com/certificates/2166c58cac22",
+  },
+  {
     title: "Oops in Java",
     issuer: "Coding Ninjas",
     issued: "Jun 2023",
