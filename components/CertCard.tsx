@@ -1,4 +1,4 @@
-import { Award } from "lucide-react";
+import { Award, BadgeCheck, FileText } from "lucide-react";
 import Chips from "./Chips";
 import type { Cert } from "@/lib/certs";
 
@@ -15,9 +15,19 @@ export default function CertCard({ c }: { c: Cert }) {
         </div>
       </div>
       <Chips items={c.skills} />
-      {c.url && (
-        <div className="mt-auto border-t border-line pt-3 text-sm font-semibold">
-          <a href={c.url} target="_blank" rel="noopener noreferrer">View credential ↗</a>
+      {(c.url || c.verifyUrl || c.file) && (
+        <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-3 text-sm font-semibold">
+          {c.verifyUrl && (
+            <a href={c.verifyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
+              <BadgeCheck size={16} aria-hidden="true" /> Verified badge ↗
+            </a>
+          )}
+          {c.file && (
+            <a href={c.file} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
+              <FileText size={16} aria-hidden="true" /> Certificate PDF
+            </a>
+          )}
+          {c.url && <a href={c.url} target="_blank" rel="noopener noreferrer">View credential ↗</a>}
         </div>
       )}
     </article>

@@ -4,6 +4,10 @@ export type Cert = {
   issued: string;
   skills: string[];
   url?: string;
+  /** Independent verification page, e.g. a Credly badge. Shown with a "Verified" treatment. */
+  verifyUrl?: string;
+  /** Locally hosted certificate PDF, for credentials that have no online verification link. */
+  file?: string;
 };
 
 export const certifications: Cert[] = [
@@ -27,6 +31,15 @@ export const certifications: Cert[] = [
     issued: "Jun 2023",
     skills: ["Java"],
     url: "https://ninjasfiles.s3.amazonaws.com/certificate-333956-b20b10651bec12a55649ef36a50d8511.pdf",
+  },
+  {
+    title: "CCNA: Introduction to Networks",
+    issuer: "Cisco Networking Academy",
+    issued: "Apr 2023",
+    skills: ["Network Fundamentals", "IPv4 & IPv6 Addressing", "Ethernet & Switching", "Security Fundamentals"],
+    // The PDF certificate carries no verification link; the Credly badge is the verifiable record.
+    verifyUrl: "https://www.credly.com/badges/6452e568-83d6-4f3d-98a4-da6598128ebc",
+    file: "/certificates/cisco-ccna-introduction-to-networks.pdf",
   },
   {
     title: "Responsive Web Design",
